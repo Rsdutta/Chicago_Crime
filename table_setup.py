@@ -1,6 +1,15 @@
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SQLContext
+from crime_clustering import create_clusters
+from crime_statistics import *
 
+##########################################################################################
+# This file is the main file where we will be adding functions to see results of our     #
+# code. Add functions you want to run after setup_table. Other than that add new         #
+# functions to different files and import them as i did above with crime_clustering, etc #
+# in order to keep this document clutter free. There are TODO's below with things we need#
+# to work on.                                                                            #   
+##########################################################################################
 
 def setup_table(sc, sqlContext, reviews_filename):
     '''
@@ -19,9 +28,18 @@ def setup_table(sc, sqlContext, reviews_filename):
 
 
 if __name__ == '__main__':
+
 	file = "hdfs:///projects/group14/crimedata.csv"
 	# Setup Spark
 	conf = SparkConf().setAppName("crime_data_stats")
 	sc = SparkContext(conf=conf)
 	sqlContext = SQLContext(sc)
 	setup_table(sc, sqlContext, file)
+
+    #################################################################################################
+    #                TODO:                                                                          #
+    # 1. Parse the DB for crime types based on location/type of crime, time of day, etc             #
+    # 2. Perform k-means clustering on the dataset using different attributes to create the clusters#
+    # ###############################################################################################
+
+
