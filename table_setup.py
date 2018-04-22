@@ -29,12 +29,13 @@ def setup_table(sc, sqlContext, reviews_filename):
 
 if __name__ == '__main__':
 
-	file = "hdfs:///projects/group14/crimedata.csv"
-	# Setup Spark
-	conf = SparkConf().setAppName("crime_data_stats")
-	sc = SparkContext(conf=conf)
-	sqlContext = SQLContext(sc)
-	setup_table(sc, sqlContext, file)
+    file = "hdfs:///projects/group14/crimedata.csv"
+    # Setup Spark
+    conf = SparkConf().setAppName("crime_data_stats")
+    sc = SparkContext(conf=conf)
+    sqlContext = SQLContext(sc)
+    setup_table(sc, sqlContext, file)
+    create_clusters(sqlContext)
 
     #################################################################################################
     #                TODO:                                                                          #
