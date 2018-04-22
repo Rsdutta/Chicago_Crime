@@ -5,13 +5,15 @@ from pyspark.ml import Pipeline
 from pyspark.ml.clustering import KMeans, KMeansModel
 from pyspark.ml.feature import VectorAssembler
 import folium
+from folium.plugins import MarkerCluster
 
 
 def create_clusters(sqlContext):
-	specific_data = sqlContext.sql('SELECT Description, Date, Latitude, Longitude FROM crime_data')
+	specific_data = sqlContext.sql('SELECT Description, Date, Latitude, Longitude FROM crime_data where `Primary Type` == "HOMOCIDE" or `Primary Type` == "ASSAULT" ')
 
+	specific_data.filter(specific_data.Description != "SIMPLE")
+	specific_data = specific_data.sample(False, .01)
 	#create different k-means outputs depending on the date since that is what we are testing
-
 
 	vecAssembler = VectorAssembler(inputCols=['Latitude', 'Longitude'], outputCol="features")
 	df_kmeans = vecAssembler.transform(specific_data).select('Description', 'features', 'Latitude', 'Longitude')
@@ -43,19 +45,21 @@ def create_clusters(sqlContext):
 	create_visuals(transformed)
 
 
-	#TODO: figure out folium for the visualization and do different outputs for times of day, etc.
+	#TODO: weekday crimes vs weekend crimes
 
 def create_visuals(df):
 	
 	latitude = df.select(F.mean('Latitude')).collect()[0][0]
 	longitude = df.select(F.mean('Longitude')).collect()[0][0]
 	chicago_map = folium.Map(location=[latitude, longitude], 
- 					zoom_start=12)
+ 					zoom_start=10)
+
+	marker_cluster = MarkerCluster().add_to(chicago_map)
 
 	locationslist = df.rdd.map(lambda x: ((x.Description, x.prediction), (x.Latitude, x.Longitude)))
 	locationlist = locationslist.collect()
 	for index in range(0, len(locationlist)):
-		folium.Marker([locationlist[index][1][0], locationlist[index][1][1]], popup=locationlist[index][0][0]).add_to(chicago_map)
-	chicago_map.save('index.html')
+		folium.Marker([locationlist[index][1][0], locationlist[index][1][1]], popup=locationlist[index][0][0]).add_to(marker_cluster)
+	chicago_map.save('severe.html')
 
 

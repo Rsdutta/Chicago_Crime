@@ -23,6 +23,7 @@ def setup_table(sc, sqlContext, reviews_filename):
     #begin preprocessing to get rid of null values
     df = df.dropna(how='any', thresh=None, subset=None)
     df = df.drop_duplicates()
+    df = df.filter(df.Description != "SIMPLE")
     sqlContext.registerDataFrameAsTable(df, "crime_data")
 
 
