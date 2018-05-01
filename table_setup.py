@@ -1,6 +1,6 @@
 from pyspark import SparkContext, SparkConf
 from pyspark.sql import SQLContext
-from crime_clustering import create_clusters
+# from crime_clustering import create_clusters
 from crime_statistics import *
 
 ##########################################################################################
@@ -26,17 +26,68 @@ def setup_table(sc, sqlContext, reviews_filename):
     df = df.filter(df.Description != "SIMPLE")
     sqlContext.registerDataFrameAsTable(df, "crime_data")
 
+def setup_table2(sc, sqlContext, reviews_filename):
+    '''
+    Args:
+        sc: The Spark Context
+        sqlContext: The Spark SQL context
+        reviews_filename: Filename of the Amazon reviews file to use, where each line represents a review    
+    Parse the reviews file and register it as a table in Spark SQL in this function
+    '''
+    df = sqlContext.read.csv(reviews_filename, header=True, inferSchema=True)
+    #begin preprocessing to get rid of null values
+    df = df.dropna(how='any', thresh=None, subset=None)
+    df = df.drop_duplicates()
+    # df = df.filter(df.Description != "SIMPLE")
+    sqlContext.registerDataFrameAsTable(df, "stats_data")
 
 
 if __name__ == '__main__':
 
     file = "hdfs:///projects/group14/crimedata.csv"
+    f = open("stats_out", "w")
+    f2 = open("stats_out2", "w")
+    f3 = open("by_year_out", "w")
     # Setup Spark
     conf = SparkConf().setAppName("crime_data_stats")
     sc = SparkContext(conf=conf)
     sqlContext = SQLContext(sc)
-    setup_table(sc, sqlContext, file)
-    create_clusters(sqlContext)
+    setup_table2(sc, sqlContext, file)
+    # create_clusters(sqlContext)
+
+    # primary_type_counts = primaryCounts(sqlContext)
+    # f.write(str(primary_type_counts))
+    # f.write("\n")
+    # print(primary_type_counts)
+
+    community_counts = communityAreaCounts(sqlContext)
+    f.write(str(community_counts))
+    # f.write("\n")    
+    print(community_counts)
+
+    # description_counts = descriptionCounts(sqlContext)
+    # f.write(str(description_counts))
+    # f.write("\n")
+    # print(description_counts)
+
+    # d = descriptionsForPrimaries(sqlContext)
+    # d2 = descriptionsForCommunities(sqlContext)
+    # f2.write(str(d))
+    # f2.write("\n")
+    # f2.write(str(d2))
+    # print('*'*200 + str(d))
+    # print('*'*200 + str(d2))
+
+    # community_years = communitiesByYear(sqlContext)
+    # primary_type_years = primariesByYear(sqlContext)
+    # f3.write(str(community_years))
+    # f3.write("\n")
+    # f3.write(str(primary_type_years))
+    # print('*'*200 + str(community_years))
+    # print('*'*200 + str(primary_type_years))
+
+
+
 
     #################################################################################################
     #                TODO:                                                                          #
