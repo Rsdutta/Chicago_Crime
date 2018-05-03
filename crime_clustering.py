@@ -65,6 +65,6 @@ def create_visuals(df):
 	locationlist = locationslist.collect()
 	for index in range(0, len(locationlist)):
 		folium.Marker([locationlist[index][1][0], locationlist[index][1][1]], popup=locationlist[index][0][0]).add_to(marker_cluster)
-	chicago_map.save('weekend.html')
+	chicago_map.save('total_crimes.html')
 
 
