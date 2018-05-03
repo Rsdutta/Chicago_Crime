@@ -46,8 +46,8 @@ if __name__ == '__main__':
 
     file = "hdfs:///projects/group14/crimedata.csv"
     f = open("stats_out", "w")
-    f2 = open("stats_out2", "w")
-    f3 = open("by_year_out", "w")
+    # f2 = open("stats_out2", "w")
+    # f3 = open("by_year_out", "w")
     # Setup Spark
     conf = SparkConf().setAppName("crime_data_stats")
     sc = SparkContext(conf=conf)
@@ -55,9 +55,9 @@ if __name__ == '__main__':
     setup_table2(sc, sqlContext, file)
     # create_clusters(sqlContext)
 
-    # primary_type_counts = primaryCounts(sqlContext)
-    # f.write(str(primary_type_counts))
-    # f.write("\n")
+    primary_type_counts = primaryCounts(sqlContext)
+    f.write(str(primary_type_counts))
+    f.write("\n")
     # print(primary_type_counts)
 
     community_counts = communityAreaCounts(sqlContext)
@@ -65,24 +65,24 @@ if __name__ == '__main__':
     # f.write("\n")    
     print(community_counts)
 
-    # description_counts = descriptionCounts(sqlContext)
-    # f.write(str(description_counts))
-    # f.write("\n")
+    description_counts = descriptionCounts(sqlContext)
+    f.write(str(description_counts))
+    f.write("\n")
     # print(description_counts)
 
-    # d = descriptionsForPrimaries(sqlContext)
-    # d2 = descriptionsForCommunities(sqlContext)
-    # f2.write(str(d))
-    # f2.write("\n")
-    # f2.write(str(d2))
+    d = descriptionsForPrimaries(sqlContext)
+    d2 = descriptionsForCommunities(sqlContext)
+    f.write(str(d))
+    f.write("\n")
+    f.write(str(d2))
     # print('*'*200 + str(d))
     # print('*'*200 + str(d2))
 
-    # community_years = communitiesByYear(sqlContext)
-    # primary_type_years = primariesByYear(sqlContext)
-    # f3.write(str(community_years))
-    # f3.write("\n")
-    # f3.write(str(primary_type_years))
+    community_years = communitiesByYear(sqlContext)
+    primary_type_years = primariesByYear(sqlContext)
+    f.write(str(community_years))
+    f.write("\n")
+    f.write(str(primary_type_years))
     # print('*'*200 + str(community_years))
     # print('*'*200 + str(primary_type_years))
 
