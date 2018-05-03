@@ -1,0 +1,33 @@
+Route with avoiding
+===================
+Total time of trip:	172.3 seconds.
+Total distance of trip:	1.206 miles.
+Total steps of trip:	6 steps.
+1. Head south on Dan Ryan Expressway, I 90, I 94 for 0.393 miles (35 seconds).
+2. Turn slight right for 0.219 miles (21.1 seconds).
+3. Continue straight onto South Wells Street for 0 miles (39.2 seconds).
+4. Turn right onto West 57th Street for 0.029 miles (11.3 seconds).
+5. Turn right for 0.227 miles (65.7 seconds).
+6. Arrive at your destination, on the left.
+
+
+Route without avoiding
+======================
+Total time of trip:	79.4 seconds.
+Total distance of trip:	0.815 miles.
+Total steps of trip:	8 steps.
+1. Head south for 0.032 miles (3.1 seconds).
+2. Continue straight onto Dan Ryan Expressway, I 90, I 94 for 0.361 miles (32.2 seconds).
+3. Turn slight right for 0.219 miles (21.1 seconds).
+4. Continue straight onto South Wells Street for 0.086 miles (10 seconds).
+5. Turn right onto West Garfield Boulevard for 0.062 miles (5.5 seconds).
+6. Turn left onto South Princeton Avenue for 0.025 miles (4.9 seconds).
+7. Turn left onto West Garfield Boulevard for 0.029 miles (2.6 seconds).
+8. Arrive at West Garfield Boulevard, on the left.
+
+
+Comparison Statistics
+=====================
+Avoiding took 92.9 more seconds.
+Avoiding took 0.391 more miles.
+Avoiding took 2 less steps.
