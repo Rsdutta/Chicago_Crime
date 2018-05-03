@@ -6,4 +6,6 @@ To get the error vs k graph and clustering scatter plot from matplotlib run grap
 
 To get the route_comparison.txt file, run routing.py and the result will be in the aforementioned file. In order to customize routing from point a and point b, change lat1, lon1, lat2, and lon2 parameters in the file. 
 
+To get statistic charts and graphs run stats.py
+
 Descriptions for all of these results are in the results section of the final report. 
