@@ -74,7 +74,7 @@ def crimeByArea(n):#most crime ridden communities
 def barPrimaryByYear(n):#primary crimes by year in bar graphs
 
 	fig, ax = plt.subplots()
-	y_pos = np.arange(n)
+	y_pos = np.arange(n+1)
 	bar_width = 0.1
 	count = 0
 	colors = {'THEFT':'b', 'BATTERY':'r', 'CRIMINAL DAMAGE':'g', 'NARCOTICS':'y','ASSAULT':'m','OTHER OFFENSE':'c'
@@ -90,7 +90,6 @@ def barPrimaryByYear(n):#primary crimes by year in bar graphs
 	    plt.xticks(y_pos + count*bar_width, x, rotation='vertical')
 	    count += 50
 	    plt.title('Top Crime Categories ' + str(year))
-	    plt.legend()
 	    plt.show()
 
 
@@ -124,8 +123,8 @@ def linePrimaryByYear():
 
 
 
-# piePrimaryBreakdown(4)
-# crimeByArea(10)
-# barPrimaryByYear(5)
+piePrimaryBreakdown(4)
+crimeByArea(10)
+barPrimaryByYear(5)
 linePrimaryByYear()
 
