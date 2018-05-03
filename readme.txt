@@ -1,4 +1,4 @@
-Run pip3 install requirements.txt
+Run pip3 install -r requirements.txt
 
 To run the kmeans clustering and heat map generation, first run table_setup_2.py. The results for the clustering map and heatmap will be in total_crimes.html and time_heatmap.py respectively. 
 
