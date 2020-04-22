@@ -1,1 +1,1 @@
-results/ export-ignore
+*.html linguist-detectable=false
